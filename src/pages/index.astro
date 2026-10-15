@@ -58,7 +58,7 @@ const other: Product[] = [
 	<header class="nav">
 		<a class="logo" href="#top">
 			<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 2 4 5v6c0 5 3.5 9.5 8 11 4.5-1.5 8-6 8-11V5l-8-3Z"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg>
-			ClearCheck <span>Supply</span>
+			gnarcotix<span>.xyz</span>
 		</a>
 		<nav>
 			<a href="#strips">Test Strips</a>
@@ -234,7 +234,7 @@ const other: Product[] = [
 	</main>
 
 	<footer>
-		<p><strong>ClearCheck Supply</strong> is a demo harm reduction storefront.</p>
+		<p><strong>gnarcotix.xyz</strong> is a demo harm reduction storefront.</p>
 		<p class="fine">*Accuracy based on manufacturer lab testing at the stated detection level. Products are for drug checking and
 			screening only. Results are not a guarantee of safety. Must be 18+ to purchase.</p>
 	</footer>
@@ -257,7 +257,7 @@ const other: Product[] = [
 
 <script>
 	type Line = { id: string; name: string; price: number; qty: number };
-	const KEY = 'clearcheck-cart';
+	const KEY = 'gnarcotix-cart';
 	let cart: Line[] = JSON.parse(localStorage.getItem(KEY) || '[]');
 
 	const $ = (id: string) => document.getElementById(id)!;
@@ -341,22 +341,22 @@ const other: Product[] = [
 </script>
 
 <style>
-	.banner { background: var(--ink); color: #d1fae5; text-align: center; font-size: .85rem; padding: .5rem 1rem; }
+	.banner { background: #050807; color: var(--brand); border-bottom: 1px solid var(--line); text-align: center; font-size: .85rem; padding: .5rem 1rem; }
 	.nav {
 		position: sticky; top: 0; z-index: 20; display: flex; align-items: center; gap: 1.5rem;
-		padding: .9rem clamp(1rem, 4vw, 3rem); background: rgba(246,248,247,.92); backdrop-filter: blur(8px);
+		padding: .9rem clamp(1rem, 4vw, 3rem); background: rgba(10,14,13,.85); backdrop-filter: blur(8px);
 		border-bottom: 1px solid var(--line);
 	}
 	.logo { display: flex; align-items: center; gap: .5rem; font-weight: 800; font-size: 1.2rem; color: var(--brand); text-decoration: none; }
-	.logo span { color: var(--ink); font-weight: 500; }
+	.logo span { color: var(--muted); font-weight: 500; }
 	.nav nav { display: flex; gap: 1.25rem; margin-left: auto; }
 	.nav nav a { color: var(--ink); text-decoration: none; font-size: .95rem; }
 	.nav nav a:hover { color: var(--brand); }
 	.cart-btn {
-		display: flex; align-items: center; gap: .4rem; border: 1px solid var(--line); background: #fff;
+		display: flex; align-items: center; gap: .4rem; border: 1px solid var(--line); background: var(--card);
 		padding: .5rem .9rem; border-radius: 999px;
 	}
-	.cart-btn span { background: var(--brand); color: #fff; border-radius: 999px; padding: 0 .5rem; font-size: .8rem; font-weight: 700; }
+	.cart-btn span { background: var(--brand); color: var(--on-brand); border-radius: 999px; padding: 0 .5rem; font-size: .8rem; font-weight: 700; }
 
 	main { max-width: 1200px; margin: 0 auto; padding: 0 clamp(1rem, 4vw, 3rem); }
 	.hero { display: grid; grid-template-columns: 1.2fr 1fr; gap: 3rem; align-items: center; padding: 4rem 0 3rem; }
@@ -366,7 +366,7 @@ const other: Product[] = [
 	.lead { font-size: 1.1rem; color: var(--muted); max-width: 38rem; }
 	.hero-cta { display: flex; gap: .75rem; margin: 1.5rem 0; flex-wrap: wrap; }
 	.btn { display: inline-block; border: 0; border-radius: 10px; padding: .8rem 1.3rem; font-weight: 600; text-decoration: none; transition: .15s; }
-	.btn.primary { background: var(--brand); color: #fff; }
+	.btn.primary { background: var(--brand); color: var(--on-brand); }
 	.btn.primary:hover { background: var(--brand-dark); }
 	.btn.ghost { background: transparent; color: var(--brand); border: 1.5px solid var(--brand); }
 	.btn.small { padding: .5rem .9rem; font-size: .9rem; }
@@ -374,15 +374,15 @@ const other: Product[] = [
 	.trust { display: flex; gap: 2rem; list-style: none; padding: 0; margin: 0; color: var(--muted); }
 	.trust strong { display: block; color: var(--ink); font-size: 1.4rem; }
 
-	.hero-art { background: linear-gradient(145deg, #ccfbf1, #e0f2fe); border-radius: 24px; padding: 2.5rem; text-align: center; }
+	.hero-art { background: radial-gradient(circle at 30% 20%, rgba(45,212,191,.22), transparent 60%), linear-gradient(145deg, #0f2421, #0d1520); border: 1px solid var(--line); border-radius: 24px; padding: 2.5rem; text-align: center; }
 	.strip-art { display: flex; justify-content: center; gap: 1.25rem; }
 	.strip {
 		position: relative; width: 44px; height: 260px; background: #fff; border-radius: 6px;
-		box-shadow: 0 10px 25px rgba(15,118,110,.18); overflow: hidden; transform: rotate(-4deg);
+		box-shadow: 0 10px 30px rgba(45,212,191,.25); overflow: hidden; transform: rotate(-4deg);
 	}
 	.strip:nth-child(2) { transform: translateY(18px); }
 	.strip:nth-child(3) { transform: rotate(4deg); }
-	.handle { position: absolute; top: 0; left: 0; right: 0; height: 70px; background: var(--brand); color: #fff; font-size: .7rem; font-weight: 800; display: grid; place-items: center; writing-mode: vertical-rl; }
+	.handle { position: absolute; top: 0; left: 0; right: 0; height: 70px; background: var(--brand); color: var(--on-brand); font-size: .7rem; font-weight: 800; display: grid; place-items: center; writing-mode: vertical-rl; }
 	.line { position: absolute; left: 8px; right: 8px; height: 5px; border-radius: 3px; background: #be185d; }
 	.line.c { top: 110px; }
 	.line.t { top: 140px; }
@@ -397,12 +397,12 @@ const other: Product[] = [
 	.grid { display: grid; gap: 1.25rem; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); }
 	.grid.four { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
 	.card { background: var(--card); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; display: flex; flex-direction: column; transition: .2s; }
-	.card:hover { transform: translateY(-3px); box-shadow: 0 12px 30px rgba(16,32,27,.08); }
+	.card:hover { transform: translateY(-3px); border-color: rgba(45,212,191,.4); box-shadow: 0 12px 30px rgba(0,0,0,.4); }
 	.card.soon { opacity: .8; }
 	.swatch { position: relative; height: 130px; display: grid; place-items: center; }
 	.swatch.short { height: 70px; }
 	.mini-strip { width: 150px; height: 22px; background: #fff; border-radius: 4px; box-shadow: 0 4px 12px rgba(0,0,0,.2); background-image: linear-gradient(90deg, rgba(0,0,0,.25) 0 30%, transparent 30% 55%, #be185d 55% 57%, transparent 57% 68%, #be185d 68% 70%, transparent 70%); }
-	.tag { position: absolute; top: .75rem; left: .75rem; background: rgba(255,255,255,.95); color: var(--ink); font-size: .72rem; font-weight: 700; padding: .2rem .55rem; border-radius: 999px; }
+	.tag { position: absolute; top: .75rem; left: .75rem; background: rgba(5,8,7,.8); color: #fff; font-size: .72rem; font-weight: 700; padding: .2rem .55rem; border-radius: 999px; }
 	.card-body { padding: 1.1rem 1.25rem 1.25rem; display: flex; flex-direction: column; flex: 1; }
 	.card h3 { margin: 0; font-size: 1.1rem; }
 	.unit { margin: .15rem 0 .5rem; color: var(--muted); font-size: .85rem; }
@@ -410,36 +410,36 @@ const other: Product[] = [
 	.buy { display: flex; align-items: center; justify-content: space-between; gap: .5rem; }
 	.price { font-weight: 800; font-size: 1.2rem; }
 	.price small { font-weight: 400; color: var(--muted); font-size: .78rem; }
-	.pill { align-self: flex-start; margin-top: .35rem; background: #fef3c7; color: #92400e; font-size: .72rem; font-weight: 700; padding: .15rem .5rem; border-radius: 999px; }
-	.panel-badge { background: #1e293b; color: #fff; font-size: 2.6rem; font-weight: 800; padding: 1rem 1.25rem; line-height: 1; }
+	.pill { align-self: flex-start; margin-top: .35rem; background: rgba(245,158,11,.15); color: #fbbf24; font-size: .72rem; font-weight: 700; padding: .15rem .5rem; border-radius: 999px; }
+	.panel-badge { background: #1a2421; border-bottom: 1px solid var(--line); color: #fff; font-size: 2.6rem; font-weight: 800; padding: 1rem 1.25rem; line-height: 1; }
 	.panel-badge small { font-size: .9rem; font-weight: 500; margin-left: .35rem; opacity: .7; }
 	.fine { font-size: .82rem; color: var(--muted); }
 
-	.how { background: #fff; border: 1px solid var(--line); border-radius: 24px; padding: 3rem; margin: 2rem 0; }
+	.how { background: var(--card); border: 1px solid var(--line); border-radius: 24px; padding: 3rem; margin: 2rem 0; }
 	.steps { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
-	.steps span { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; background: #ccfbf1; color: var(--brand); font-weight: 800; }
+	.steps span { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; background: rgba(45,212,191,.15); color: var(--brand); font-weight: 800; }
 	.steps h4 { margin: .75rem 0 .25rem; font-size: 1.1rem; }
 	.steps p { margin: 0; color: var(--muted); font-size: .93rem; }
-	.warn { margin-top: 2rem; background: #fffbeb; border-left: 4px solid var(--accent); padding: 1rem 1.25rem; border-radius: 8px; font-size: .95rem; }
+	.warn { margin-top: 2rem; background: rgba(245,158,11,.08); border-left: 4px solid var(--accent); padding: 1rem 1.25rem; border-radius: 8px; font-size: .95rem; }
 
-	.nouse { text-align: center; background: var(--ink); color: #ecfdf5; border-radius: 24px; padding: 3.5rem 2rem; margin: 2rem 0; }
+	.nouse { text-align: center; background: linear-gradient(135deg, #0f3d38, #0b1a24); border: 1px solid var(--line); color: #ecfdf5; border-radius: 24px; padding: 3.5rem 2rem; margin: 2rem 0; }
 	.nouse h2 { margin: 0 0 .75rem; font-size: 2rem; }
 	.nouse p { max-width: 42rem; margin: 0 auto; color: #a7f3d0; }
 
 	.help { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
-	.help-card { background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 1.25rem; }
+	.help-card { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 1.25rem; }
 	.help-card h3 { margin: 0; font-size: 1rem; }
 	.help-card .num { font-size: 1.3rem; font-weight: 800; color: var(--brand); margin: .35rem 0; }
 	.help-card p:last-child { margin: 0; color: var(--muted); font-size: .9rem; }
-	.help-card.emergency { border-color: #fecaca; background: #fef2f2; }
+	.help-card.emergency { border-color: #7f1d1d; background: rgba(185,28,28,.12); }
 	.help-card.emergency .num { color: var(--danger); }
 
 	footer { text-align: center; padding: 2.5rem 1rem 3rem; border-top: 1px solid var(--line); margin-top: 2rem; }
 	footer p { margin: .25rem auto; max-width: 48rem; }
 
-	.overlay { position: fixed; inset: 0; background: rgba(0,0,0,.35); opacity: 0; pointer-events: none; transition: .2s; z-index: 30; }
+	.overlay { position: fixed; inset: 0; background: rgba(0,0,0,.6); opacity: 0; pointer-events: none; transition: .2s; z-index: 30; }
 	.overlay.open { opacity: 1; pointer-events: auto; }
-	.drawer { position: fixed; top: 0; right: 0; height: 100%; width: min(380px, 100%); background: #fff; z-index: 40; transform: translateX(100%); transition: .25s; display: flex; flex-direction: column; box-shadow: -10px 0 30px rgba(0,0,0,.1); }
+	.drawer { position: fixed; top: 0; right: 0; height: 100%; width: min(380px, 100%); background: var(--card); border-left: 1px solid var(--line); z-index: 40; transform: translateX(100%); transition: .25s; display: flex; flex-direction: column; box-shadow: -10px 0 30px rgba(0,0,0,.1); }
 	.drawer.open { transform: none; }
 	.drawer-head { display: flex; justify-content: space-between; align-items: center; padding: 1.25rem; border-bottom: 1px solid var(--line); }
 	.drawer-head h3 { margin: 0; }
@@ -448,12 +448,12 @@ const other: Product[] = [
 	#cartItems :global(li) { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: 1rem 0; border-bottom: 1px solid var(--line); }
 	#cartItems :global(small) { display: block; color: var(--muted); }
 	#cartItems :global(.qty) { display: flex; align-items: center; gap: .5rem; }
-	#cartItems :global(.qty button) { width: 28px; height: 28px; border-radius: 6px; border: 1px solid var(--line); background: #fff; }
+	#cartItems :global(.qty button) { width: 28px; height: 28px; border-radius: 6px; border: 1px solid var(--line); background: transparent; }
 	.empty { text-align: center; color: var(--muted); padding: 2rem; }
 	.drawer-foot { padding: 1.25rem; border-top: 1px solid var(--line); }
 	.total { display: flex; justify-content: space-between; margin-bottom: 1rem; font-size: 1.1rem; }
 
-	.toast { position: fixed; bottom: 1.5rem; left: 50%; transform: translate(-50%, 150%); background: var(--ink); color: #fff; padding: .75rem 1.25rem; border-radius: 10px; transition: .25s; z-index: 50; font-size: .95rem; }
+	.toast { position: fixed; bottom: 1.5rem; left: 50%; transform: translate(-50%, 150%); background: #1c2724; border: 1px solid var(--brand); color: #fff; padding: .75rem 1.25rem; border-radius: 10px; transition: .25s; z-index: 50; font-size: .95rem; }
 	.toast.show { transform: translate(-50%, 0); }
 
 	@media (max-width: 860px) {

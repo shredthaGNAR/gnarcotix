@@ -63,6 +63,7 @@ const other: Product[] = [
 		<nav>
 			<a href="#strips">Test Strips</a>
 			<a href="#how">How It Works</a>
+			<a href="#lab">Lab Testing</a>
 			<a href="#panels">Urine Tests</a>
 			<a href="#other">More Gear</a>
 			<a href="#help">Get Help</a>
@@ -153,6 +154,49 @@ const other: Product[] = [
 			</div>
 		</section>
 
+		<section id="lab" class="section lab">
+			<div class="lab-intro">
+				<p class="eyebrow">New: Lab Analysis</p>
+				<h2>Full lab testing for <span class="hl">under $20</span>.</h2>
+				<p class="lead">
+					Strips tell you if one specific substance is there. A lab tells you <em>everything</em> that's in it.
+					We work with top U.S. labs to identify active ingredients, cutting agents, and unknown or emerging
+					substances that no strip can catch yet.
+				</p>
+				<ul class="checks">
+					<li>Identifies all detectable compounds, not just one</li>
+					<li>Catches new adulterants before strips exist for them</li>
+					<li>Anonymous: results are tied to a sample code, not your name</li>
+					<li>Analyzed by U.S.-based labs only</li>
+				</ul>
+				<div class="buy lab-buy">
+					<span class="price big">$19.00 <small>per sample</small></span>
+					<button class="btn primary add" data-id="lab-1" data-name="Lab Analysis Mail-in Kit" data-price="19">Order a Lab Kit</button>
+				</div>
+			</div>
+
+			<div class="compare">
+				<h3>How we compare</h3>
+				<div class="bar-row">
+					<div class="bar-label"><strong>gnarcotix.xyz</strong><span>U.S. labs</span></div>
+					<div class="bar"><div class="fill ours" style="width:15%"></div></div>
+					<div class="bar-price ours-txt">$19</div>
+				</div>
+				<div class="bar-row">
+					<div class="bar-label"><strong>Typical lab services</strong><span>Some based overseas</span></div>
+					<div class="bar"><div class="fill theirs" style="width:100%"></div></div>
+					<div class="bar-price">$125+</div>
+				</div>
+				<p class="save">Save <strong>85%</strong> or more on every sample.</p>
+
+				<ol class="lab-steps">
+					<li><span>1</span><div><strong>Order a kit</strong><p>Get a prepaid mailer, sample bag, and a unique anonymous sample code.</p></div></li>
+					<li><span>2</span><div><strong>Send a tiny sample</strong><p>Only a few milligrams are needed. Seal it, label it with your code, and mail it.</p></div></li>
+					<li><span>3</span><div><strong>Get your results</strong><p>Look up your code online once the lab finishes. Typical turnaround: 5 to 10 business days.</p></div></li>
+				</ol>
+			</div>
+		</section>
+
 		<section id="panels" class="section">
 			<div class="section-head">
 				<h2>Standard Urine Drug Tests</h2>
@@ -236,7 +280,7 @@ const other: Product[] = [
 	<footer>
 		<p><strong>gnarcotix.xyz</strong> is a demo harm reduction storefront.</p>
 		<p class="fine">*Accuracy based on manufacturer lab testing at the stated detection level. Products are for drug checking and
-			screening only. Results are not a guarantee of safety. Must be 18+ to purchase.</p>
+			screening only. Results are not a guarantee of safety. Lab turnaround times are estimates. Check your local laws before mailing any sample. Must be 18+ to purchase.</p>
 	</footer>
 
 	<div class="overlay" id="overlay"></div>
@@ -422,6 +466,32 @@ const other: Product[] = [
 	.steps p { margin: 0; color: var(--muted); font-size: .93rem; }
 	.warn { margin-top: 2rem; background: rgba(245,158,11,.08); border-left: 4px solid var(--accent); padding: 1rem 1.25rem; border-radius: 8px; font-size: .95rem; }
 
+	.lab { display: grid; grid-template-columns: 1.1fr 1fr; gap: 2.5rem; align-items: start; }
+	.lab h2 { font-size: clamp(1.8rem, 3.5vw, 2.6rem); margin: .4rem 0 .75rem; line-height: 1.1; }
+	.hl { color: var(--brand); }
+	.lab .lead em { color: var(--ink); }
+	.checks { list-style: none; padding: 0; margin: 1.25rem 0 1.5rem; display: grid; gap: .55rem; }
+	.checks li { position: relative; padding-left: 1.75rem; }
+	.checks li::before { content: ""; position: absolute; left: 0; top: .3rem; width: 1rem; height: 1rem; border-radius: 50%; background: rgba(45,212,191,.18); box-shadow: inset 0 0 0 2px var(--brand); }
+	.lab-buy { justify-content: flex-start; gap: 1.25rem; flex-wrap: wrap; }
+	.price.big { font-size: 1.8rem; }
+	.compare { background: var(--card); border: 1px solid var(--line); border-radius: 20px; padding: 1.75rem; }
+	.compare h3 { margin: 0 0 1.25rem; }
+	.bar-row { display: grid; grid-template-columns: 150px 1fr 60px; gap: .75rem; align-items: center; margin-bottom: 1rem; }
+	.bar-label span { display: block; font-size: .78rem; color: var(--muted); }
+	.bar { height: 14px; background: #0a0e0d; border-radius: 999px; overflow: hidden; }
+	.fill { height: 100%; border-radius: 999px; }
+	.fill.ours { background: var(--brand); }
+	.fill.theirs { background: #475569; }
+	.bar-price { font-weight: 800; text-align: right; }
+	.ours-txt { color: var(--brand); }
+	.save { margin: .25rem 0 1.5rem; color: var(--muted); }
+	.save strong { color: var(--brand); }
+	.lab-steps { list-style: none; padding: 1.25rem 0 0; margin: 0; border-top: 1px solid var(--line); display: grid; gap: 1rem; }
+	.lab-steps li { display: flex; gap: .85rem; }
+	.lab-steps span { flex: none; display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: rgba(45,212,191,.15); color: var(--brand); font-weight: 800; font-size: .9rem; }
+	.lab-steps p { margin: .15rem 0 0; color: var(--muted); font-size: .9rem; }
+
 	.nouse { text-align: center; background: linear-gradient(135deg, #0f3d38, #0b1a24); border: 1px solid var(--line); color: #ecfdf5; border-radius: 24px; padding: 3.5rem 2rem; margin: 2rem 0; }
 	.nouse h2 { margin: 0 0 .75rem; font-size: 2rem; }
 	.nouse p { max-width: 42rem; margin: 0 auto; color: #a7f3d0; }
@@ -462,5 +532,7 @@ const other: Product[] = [
 		.cart-btn { margin-left: auto; }
 		.steps { grid-template-columns: 1fr 1fr; }
 		.how { padding: 2rem 1.25rem; }
+		.lab { grid-template-columns: 1fr; }
+		.bar-row { grid-template-columns: 110px 1fr 50px; }
 	}
 </style>

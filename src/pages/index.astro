@@ -1,11 +1,466 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+type Product = {
+	id: string;
+	name: string;
+	price: number;
+	unit: string;
+	desc: string;
+	tag?: string;
+	color: string;
+	comingSoon?: boolean;
+};
+
+const strips: Product[] = [
+	{ id: 'fent-10', name: 'Fentanyl Test Strips', price: 12, unit: '10-pack', tag: 'Best seller', color: '#0f766e',
+		desc: 'Detects fentanyl and many fentanyl analogs in pills, powders, and residue. Results in about 5 minutes.' },
+	{ id: 'xyl-10', name: 'Xylazine Test Strips', price: 15, unit: '10-pack', tag: 'New', color: '#7c3aed',
+		desc: 'Detects xylazine ("tranq"), a veterinary sedative that naloxone does not reverse and that causes severe wounds.' },
+	{ id: 'nit-10', name: 'Nitazene Test Strips', price: 18, unit: '10-pack', tag: 'Emerging threat', color: '#dc2626',
+		desc: 'Screens for nitazenes, a class of synthetic opioids that can be far stronger than fentanyl.' },
+	{ id: 'benzo-10', name: 'Benzodiazepine Test Strips', price: 15, unit: '10-pack', color: '#2563eb',
+		desc: 'Flags benzos, including novel "designer" benzos like bromazolam showing up in counterfeit pills and dope.' },
+	{ id: 'combo-30', name: 'Triple Check Combo', price: 39, unit: '10 fentanyl + 10 xylazine + 10 nitazene', tag: 'Save 13%', color: '#0b5a54',
+		desc: 'Our most complete kit for checking opioid supply. Includes mixing cups and a step-by-step card.' },
+	{ id: 'medet', name: 'Medetomidine Test Strips', price: 0, unit: '10-pack', comingSoon: true, color: '#94a3b8',
+		desc: 'A sedative increasingly replacing xylazine in some regions. Join the waitlist to be notified.' },
+];
+
+const panels: Product[] = [
+	{ id: 'panel-6', name: '6-Panel Urine Cup', price: 6, unit: 'per cup', color: '#334155',
+		desc: 'THC, COC, OPI, AMP, mAMP, PCP.' },
+	{ id: 'panel-8', name: '8-Panel Urine Cup', price: 8, unit: 'per cup', color: '#334155',
+		desc: '6-panel plus BZO and MDMA.' },
+	{ id: 'panel-10', name: '10-Panel Urine Cup', price: 10, unit: 'per cup', color: '#334155',
+		desc: '8-panel plus BAR and MTD (methadone).' },
+	{ id: 'panel-12', name: '12-Panel Urine Cup', price: 12, unit: 'per cup', tag: 'Most complete', color: '#334155',
+		desc: '10-panel plus OXY and BUP. Adulteration strips built in.' },
+];
+
+const other: Product[] = [
+	{ id: 'reagent', name: 'Reagent Kit (Marquis, Mecke, Simon\'s)', price: 34, unit: 'kit', color: '#a16207',
+		desc: 'Color-change reagents to help identify what a substance is, not just what it contains.' },
+	{ id: 'saliva', name: '6-Panel Saliva Test', price: 9, unit: 'per test', color: '#a16207',
+		desc: 'Oral fluid swab with results in under 10 minutes.' },
+	{ id: 'scale', name: 'Milligram Scale (0.001g)', price: 29, unit: 'each', color: '#a16207',
+		desc: 'Accurate small-sample measurement for proper strip dilution.' },
+	{ id: 'naloxone', name: 'Naloxone Nasal Spray', price: 45, unit: '2-pack', tag: 'Carry this', color: '#be123c',
+		desc: 'Reverses opioid overdose. Still give it if opioids may be involved, even if xylazine or benzos are present too.' },
+];
 ---
 
 <Layout>
-	<Welcome />
+	<div class="banner">
+		Free shipping on all test strips. Discreet, unmarked packaging.
+	</div>
+
+	<header class="nav">
+		<a class="logo" href="#top">
+			<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 2 4 5v6c0 5 3.5 9.5 8 11 4.5-1.5 8-6 8-11V5l-8-3Z"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg>
+			ClearCheck <span>Supply</span>
+		</a>
+		<nav>
+			<a href="#strips">Test Strips</a>
+			<a href="#how">How It Works</a>
+			<a href="#panels">Urine Tests</a>
+			<a href="#other">More Gear</a>
+			<a href="#help">Get Help</a>
+		</nav>
+		<button class="cart-btn" id="openCart" aria-label="Open cart">
+			<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg>
+			Cart <span id="cartCount">0</span>
+		</button>
+	</header>
+
+	<main id="top">
+		<section class="hero">
+			<div>
+				<p class="eyebrow">Drug checking saves lives</p>
+				<h1>Know what's in it <em>before</em> it's in you.</h1>
+				<p class="lead">
+					Fentanyl, xylazine, nitazenes, and designer benzos are being cut into pills and powders to stretch supply
+					or fake potency. Most have never been tested on humans, and naloxone (Narcan) can't reverse sedation from
+					xylazine or benzos. Our strips give you an answer in minutes.
+				</p>
+				<div class="hero-cta">
+					<a class="btn primary" href="#strips">Shop Test Strips</a>
+					<a class="btn ghost" href="#how">See how they work</a>
+				</div>
+				<ul class="trust">
+					<li><strong>99%</strong> accuracy*</li>
+					<li><strong>~5 min</strong> results</li>
+					<li><strong>No urine</strong> needed</li>
+				</ul>
+			</div>
+			<div class="hero-art" aria-hidden="true">
+				<div class="strip-art">
+					<div class="strip"><span class="handle">FTS</span><span class="line c"></span><span class="line t"></span><span class="pad"></span></div>
+					<div class="strip"><span class="handle">XYL</span><span class="line c"></span><span class="pad"></span></div>
+					<div class="strip"><span class="handle">NIT</span><span class="line c"></span><span class="line t"></span><span class="pad"></span></div>
+				</div>
+				<p class="art-cap">Two lines = not detected. One line = detected.</p>
+			</div>
+		</section>
+
+		<section id="strips" class="section">
+			<div class="section-head">
+				<h2>Drug Checking Strips</h2>
+				<p>Our newest and most popular products. Test pills, powders, and residue, not your body.</p>
+			</div>
+			<div class="grid">
+				{strips.map((p) => (
+					<article class={`card ${p.comingSoon ? 'soon' : ''}`}>
+						<div class="swatch" style={`background:${p.color}`}>
+							<span class="mini-strip"></span>
+							{p.tag && <span class="tag">{p.tag}</span>}
+							{p.comingSoon && <span class="tag">Coming soon</span>}
+						</div>
+						<div class="card-body">
+							<h3>{p.name}</h3>
+							<p class="unit">{p.unit}</p>
+							<p class="desc">{p.desc}</p>
+							<div class="buy">
+								{p.comingSoon ? (
+									<button class="btn ghost small waitlist" data-name={p.name}>Join waitlist</button>
+								) : (
+									<>
+										<span class="price">${p.price.toFixed(2)}</span>
+										<button class="btn primary small add" data-id={p.id} data-name={p.name} data-price={p.price}>Add to cart</button>
+									</>
+								)}
+							</div>
+						</div>
+					</article>
+				))}
+			</div>
+		</section>
+
+		<section id="how" class="section how">
+			<div class="section-head">
+				<h2>How to Test in 4 Steps</h2>
+				<p>No lab, no urine sample. Just a little water and a few minutes.</p>
+			</div>
+			<ol class="steps">
+				<li><span>1</span><h4>Crush</h4><p>Crush the whole pill if you can. Fentanyl isn't evenly spread, so testing just a corner can miss it.</p></li>
+				<li><span>2</span><h4>Dissolve</h4><p>Add the sample to a clean container with water as listed on the package insert. Some drugs need extra water to avoid false positives.</p></li>
+				<li><span>3</span><h4>Dip</h4><p>Dip the wavy end of the strip into the liquid for about 15 seconds. Don't go past the max line.</p></li>
+				<li><span>4</span><h4>Read</h4><p>Lay flat and wait about 5 minutes. Two lines means not detected; one line means detected.</p></li>
+			</ol>
+			<div class="warn">
+				<strong>A negative result doesn't mean "safe."</strong> Strips only check for what they're designed to detect, and
+				dangerous substances can be unevenly mixed. Never use alone, start low and go slow, and keep naloxone nearby.
+			</div>
+		</section>
+
+		<section id="panels" class="section">
+			<div class="section-head">
+				<h2>Standard Urine Drug Tests</h2>
+				<p>FDA-cleared cups for home, workplace, and clinical screening.</p>
+			</div>
+			<div class="grid four">
+				{panels.map((p) => (
+					<article class="card compact">
+						<div class="panel-badge">{p.name.split('-')[0]}<small>panel</small></div>
+						<div class="card-body">
+							<h3>{p.name}</h3>
+							{p.tag && <span class="pill">{p.tag}</span>}
+							<p class="desc">{p.desc}</p>
+							<div class="buy">
+								<span class="price">${p.price.toFixed(2)} <small>{p.unit}</small></span>
+								<button class="btn primary small add" data-id={p.id} data-name={p.name} data-price={p.price}>Add</button>
+							</div>
+						</div>
+					</article>
+				))}
+			</div>
+			<p class="fine">Bulk pricing available for 25+ cups. Contact us for clinic and workplace orders.</p>
+		</section>
+
+		<section id="other" class="section">
+			<div class="section-head">
+				<h2>More Testing & Safety Gear</h2>
+				<p>Everything else you need to check your supply and stay safer.</p>
+			</div>
+			<div class="grid four">
+				{other.map((p) => (
+					<article class="card compact">
+						<div class="swatch short" style={`background:${p.color}`}>
+							{p.tag && <span class="tag">{p.tag}</span>}
+						</div>
+						<div class="card-body">
+							<h3>{p.name}</h3>
+							<p class="desc">{p.desc}</p>
+							<div class="buy">
+								<span class="price">${p.price.toFixed(2)} <small>{p.unit}</small></span>
+								<button class="btn primary small add" data-id={p.id} data-name={p.name} data-price={p.price}>Add</button>
+							</div>
+						</div>
+					</article>
+				))}
+			</div>
+		</section>
+
+		<section class="section nouse">
+			<h2>The safest test is the one you never need.</h2>
+			<p>
+				Testing reduces risk, but it doesn't remove it. The surest way to avoid an overdose, or a positive result,
+				is not to use. If you're ready to cut back or stop, free and confidential help is available any time.
+			</p>
+		</section>
+
+		<section id="help" class="section help">
+			<div class="help-card">
+				<h3>SAMHSA National Helpline</h3>
+				<p class="num">1-800-662-4357</p>
+				<p>Free, confidential treatment referrals 24/7.</p>
+			</div>
+			<div class="help-card">
+				<h3>Never Use Alone Hotline</h3>
+				<p class="num">1-800-484-3731</p>
+				<p>If you use, someone stays on the line and sends help if you stop responding.</p>
+			</div>
+			<div class="help-card">
+				<h3>988 Lifeline</h3>
+				<p class="num">Call or text 988</p>
+				<p>Crisis and mental health support, any time.</p>
+			</div>
+			<div class="help-card emergency">
+				<h3>Overdose?</h3>
+				<p class="num">Call 911</p>
+				<p>Give naloxone, do rescue breathing, and stay with them. Many states have Good Samaritan laws.</p>
+			</div>
+		</section>
+	</main>
+
+	<footer>
+		<p><strong>ClearCheck Supply</strong> is a demo harm reduction storefront.</p>
+		<p class="fine">*Accuracy based on manufacturer lab testing at the stated detection level. Products are for drug checking and
+			screening only. Results are not a guarantee of safety. Must be 18+ to purchase.</p>
+	</footer>
+
+	<div class="overlay" id="overlay"></div>
+	<aside class="drawer" id="drawer" aria-label="Shopping cart">
+		<div class="drawer-head">
+			<h3>Your Cart</h3>
+			<button class="x" id="closeCart" aria-label="Close cart">&times;</button>
+		</div>
+		<ul id="cartItems"></ul>
+		<p id="emptyMsg" class="empty">Your cart is empty.</p>
+		<div class="drawer-foot">
+			<div class="total"><span>Subtotal</span><strong id="cartTotal">$0.00</strong></div>
+			<button class="btn primary full" id="checkout">Checkout</button>
+		</div>
+	</aside>
+	<div class="toast" id="toast"></div>
 </Layout>
+
+<script>
+	type Line = { id: string; name: string; price: number; qty: number };
+	const KEY = 'clearcheck-cart';
+	let cart: Line[] = JSON.parse(localStorage.getItem(KEY) || '[]');
+
+	const $ = (id: string) => document.getElementById(id)!;
+	const drawer = $('drawer');
+	const overlay = $('overlay');
+	const toastEl = $('toast');
+	let toastTimer: number | undefined;
+
+	function toast(msg: string) {
+		toastEl.textContent = msg;
+		toastEl.classList.add('show');
+		clearTimeout(toastTimer);
+		toastTimer = window.setTimeout(() => toastEl.classList.remove('show'), 2200);
+	}
+
+	function save() {
+		localStorage.setItem(KEY, JSON.stringify(cart));
+		render();
+	}
+
+	function render() {
+		const list = $('cartItems');
+		list.innerHTML = '';
+		let total = 0;
+		let count = 0;
+		for (const l of cart) {
+			total += l.price * l.qty;
+			count += l.qty;
+			const li = document.createElement('li');
+			li.innerHTML = `
+				<div><strong></strong><small>$${l.price.toFixed(2)} each</small></div>
+				<div class="qty">
+					<button data-act="dec" aria-label="Decrease">-</button>
+					<span>${l.qty}</span>
+					<button data-act="inc" aria-label="Increase">+</button>
+				</div>`;
+			li.querySelector('strong')!.textContent = l.name;
+			li.querySelectorAll('button').forEach((b) =>
+				b.addEventListener('click', () => {
+					l.qty += b.dataset.act === 'inc' ? 1 : -1;
+					cart = cart.filter((x) => x.qty > 0);
+					save();
+				}),
+			);
+			list.appendChild(li);
+		}
+		$('cartCount').textContent = String(count);
+		$('cartTotal').textContent = `$${total.toFixed(2)}`;
+		$('emptyMsg').style.display = cart.length ? 'none' : 'block';
+	}
+
+	const open = () => { drawer.classList.add('open'); overlay.classList.add('open'); };
+	const close = () => { drawer.classList.remove('open'); overlay.classList.remove('open'); };
+
+	document.querySelectorAll<HTMLButtonElement>('.add').forEach((btn) =>
+		btn.addEventListener('click', () => {
+			const { id, name, price } = btn.dataset as { id: string; name: string; price: string };
+			const existing = cart.find((l) => l.id === id);
+			if (existing) existing.qty++;
+			else cart.push({ id, name, price: Number(price), qty: 1 });
+			save();
+			toast(`Added ${name}`);
+		}),
+	);
+	document.querySelectorAll<HTMLButtonElement>('.waitlist').forEach((btn) =>
+		btn.addEventListener('click', () => toast(`You're on the waitlist for ${btn.dataset.name}`)),
+	);
+
+	$('openCart').addEventListener('click', open);
+	$('closeCart').addEventListener('click', close);
+	overlay.addEventListener('click', close);
+	$('checkout').addEventListener('click', () => {
+		if (!cart.length) return toast('Your cart is empty');
+		cart = [];
+		save();
+		close();
+		toast('Order placed (demo). Thanks for testing safely.');
+	});
+
+	render();
+</script>
+
+<style>
+	.banner { background: var(--ink); color: #d1fae5; text-align: center; font-size: .85rem; padding: .5rem 1rem; }
+	.nav {
+		position: sticky; top: 0; z-index: 20; display: flex; align-items: center; gap: 1.5rem;
+		padding: .9rem clamp(1rem, 4vw, 3rem); background: rgba(246,248,247,.92); backdrop-filter: blur(8px);
+		border-bottom: 1px solid var(--line);
+	}
+	.logo { display: flex; align-items: center; gap: .5rem; font-weight: 800; font-size: 1.2rem; color: var(--brand); text-decoration: none; }
+	.logo span { color: var(--ink); font-weight: 500; }
+	.nav nav { display: flex; gap: 1.25rem; margin-left: auto; }
+	.nav nav a { color: var(--ink); text-decoration: none; font-size: .95rem; }
+	.nav nav a:hover { color: var(--brand); }
+	.cart-btn {
+		display: flex; align-items: center; gap: .4rem; border: 1px solid var(--line); background: #fff;
+		padding: .5rem .9rem; border-radius: 999px;
+	}
+	.cart-btn span { background: var(--brand); color: #fff; border-radius: 999px; padding: 0 .5rem; font-size: .8rem; font-weight: 700; }
+
+	main { max-width: 1200px; margin: 0 auto; padding: 0 clamp(1rem, 4vw, 3rem); }
+	.hero { display: grid; grid-template-columns: 1.2fr 1fr; gap: 3rem; align-items: center; padding: 4rem 0 3rem; }
+	.eyebrow { text-transform: uppercase; letter-spacing: .12em; font-size: .8rem; font-weight: 700; color: var(--brand); margin: 0; }
+	h1 { font-size: clamp(2.2rem, 5vw, 3.6rem); line-height: 1.05; margin: .5rem 0 1rem; letter-spacing: -.02em; }
+	h1 em { color: var(--brand); font-style: normal; }
+	.lead { font-size: 1.1rem; color: var(--muted); max-width: 38rem; }
+	.hero-cta { display: flex; gap: .75rem; margin: 1.5rem 0; flex-wrap: wrap; }
+	.btn { display: inline-block; border: 0; border-radius: 10px; padding: .8rem 1.3rem; font-weight: 600; text-decoration: none; transition: .15s; }
+	.btn.primary { background: var(--brand); color: #fff; }
+	.btn.primary:hover { background: var(--brand-dark); }
+	.btn.ghost { background: transparent; color: var(--brand); border: 1.5px solid var(--brand); }
+	.btn.small { padding: .5rem .9rem; font-size: .9rem; }
+	.btn.full { width: 100%; }
+	.trust { display: flex; gap: 2rem; list-style: none; padding: 0; margin: 0; color: var(--muted); }
+	.trust strong { display: block; color: var(--ink); font-size: 1.4rem; }
+
+	.hero-art { background: linear-gradient(145deg, #ccfbf1, #e0f2fe); border-radius: 24px; padding: 2.5rem; text-align: center; }
+	.strip-art { display: flex; justify-content: center; gap: 1.25rem; }
+	.strip {
+		position: relative; width: 44px; height: 260px; background: #fff; border-radius: 6px;
+		box-shadow: 0 10px 25px rgba(15,118,110,.18); overflow: hidden; transform: rotate(-4deg);
+	}
+	.strip:nth-child(2) { transform: translateY(18px); }
+	.strip:nth-child(3) { transform: rotate(4deg); }
+	.handle { position: absolute; top: 0; left: 0; right: 0; height: 70px; background: var(--brand); color: #fff; font-size: .7rem; font-weight: 800; display: grid; place-items: center; writing-mode: vertical-rl; }
+	.line { position: absolute; left: 8px; right: 8px; height: 5px; border-radius: 3px; background: #be185d; }
+	.line.c { top: 110px; }
+	.line.t { top: 140px; }
+	.pad { position: absolute; bottom: 0; left: 0; right: 0; height: 50px; background: repeating-linear-gradient(135deg, #e2e8f0 0 6px, #f8fafc 6px 12px); }
+	.art-cap { margin: 2rem 0 0; font-size: .9rem; color: var(--muted); }
+
+	.section { padding: 3.5rem 0; }
+	.section-head { margin-bottom: 1.75rem; }
+	.section-head h2 { font-size: 2rem; margin: 0 0 .25rem; letter-spacing: -.01em; }
+	.section-head p { margin: 0; color: var(--muted); }
+
+	.grid { display: grid; gap: 1.25rem; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); }
+	.grid.four { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
+	.card { background: var(--card); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; display: flex; flex-direction: column; transition: .2s; }
+	.card:hover { transform: translateY(-3px); box-shadow: 0 12px 30px rgba(16,32,27,.08); }
+	.card.soon { opacity: .8; }
+	.swatch { position: relative; height: 130px; display: grid; place-items: center; }
+	.swatch.short { height: 70px; }
+	.mini-strip { width: 150px; height: 22px; background: #fff; border-radius: 4px; box-shadow: 0 4px 12px rgba(0,0,0,.2); background-image: linear-gradient(90deg, rgba(0,0,0,.25) 0 30%, transparent 30% 55%, #be185d 55% 57%, transparent 57% 68%, #be185d 68% 70%, transparent 70%); }
+	.tag { position: absolute; top: .75rem; left: .75rem; background: rgba(255,255,255,.95); color: var(--ink); font-size: .72rem; font-weight: 700; padding: .2rem .55rem; border-radius: 999px; }
+	.card-body { padding: 1.1rem 1.25rem 1.25rem; display: flex; flex-direction: column; flex: 1; }
+	.card h3 { margin: 0; font-size: 1.1rem; }
+	.unit { margin: .15rem 0 .5rem; color: var(--muted); font-size: .85rem; }
+	.desc { margin: .25rem 0 1rem; color: var(--muted); font-size: .93rem; flex: 1; }
+	.buy { display: flex; align-items: center; justify-content: space-between; gap: .5rem; }
+	.price { font-weight: 800; font-size: 1.2rem; }
+	.price small { font-weight: 400; color: var(--muted); font-size: .78rem; }
+	.pill { align-self: flex-start; margin-top: .35rem; background: #fef3c7; color: #92400e; font-size: .72rem; font-weight: 700; padding: .15rem .5rem; border-radius: 999px; }
+	.panel-badge { background: #1e293b; color: #fff; font-size: 2.6rem; font-weight: 800; padding: 1rem 1.25rem; line-height: 1; }
+	.panel-badge small { font-size: .9rem; font-weight: 500; margin-left: .35rem; opacity: .7; }
+	.fine { font-size: .82rem; color: var(--muted); }
+
+	.how { background: #fff; border: 1px solid var(--line); border-radius: 24px; padding: 3rem; margin: 2rem 0; }
+	.steps { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+	.steps span { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; background: #ccfbf1; color: var(--brand); font-weight: 800; }
+	.steps h4 { margin: .75rem 0 .25rem; font-size: 1.1rem; }
+	.steps p { margin: 0; color: var(--muted); font-size: .93rem; }
+	.warn { margin-top: 2rem; background: #fffbeb; border-left: 4px solid var(--accent); padding: 1rem 1.25rem; border-radius: 8px; font-size: .95rem; }
+
+	.nouse { text-align: center; background: var(--ink); color: #ecfdf5; border-radius: 24px; padding: 3.5rem 2rem; margin: 2rem 0; }
+	.nouse h2 { margin: 0 0 .75rem; font-size: 2rem; }
+	.nouse p { max-width: 42rem; margin: 0 auto; color: #a7f3d0; }
+
+	.help { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
+	.help-card { background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 1.25rem; }
+	.help-card h3 { margin: 0; font-size: 1rem; }
+	.help-card .num { font-size: 1.3rem; font-weight: 800; color: var(--brand); margin: .35rem 0; }
+	.help-card p:last-child { margin: 0; color: var(--muted); font-size: .9rem; }
+	.help-card.emergency { border-color: #fecaca; background: #fef2f2; }
+	.help-card.emergency .num { color: var(--danger); }
+
+	footer { text-align: center; padding: 2.5rem 1rem 3rem; border-top: 1px solid var(--line); margin-top: 2rem; }
+	footer p { margin: .25rem auto; max-width: 48rem; }
+
+	.overlay { position: fixed; inset: 0; background: rgba(0,0,0,.35); opacity: 0; pointer-events: none; transition: .2s; z-index: 30; }
+	.overlay.open { opacity: 1; pointer-events: auto; }
+	.drawer { position: fixed; top: 0; right: 0; height: 100%; width: min(380px, 100%); background: #fff; z-index: 40; transform: translateX(100%); transition: .25s; display: flex; flex-direction: column; box-shadow: -10px 0 30px rgba(0,0,0,.1); }
+	.drawer.open { transform: none; }
+	.drawer-head { display: flex; justify-content: space-between; align-items: center; padding: 1.25rem; border-bottom: 1px solid var(--line); }
+	.drawer-head h3 { margin: 0; }
+	.x { border: 0; background: none; font-size: 1.8rem; line-height: 1; }
+	#cartItems { list-style: none; margin: 0; padding: 0 1.25rem; flex: 1; overflow: auto; }
+	#cartItems :global(li) { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: 1rem 0; border-bottom: 1px solid var(--line); }
+	#cartItems :global(small) { display: block; color: var(--muted); }
+	#cartItems :global(.qty) { display: flex; align-items: center; gap: .5rem; }
+	#cartItems :global(.qty button) { width: 28px; height: 28px; border-radius: 6px; border: 1px solid var(--line); background: #fff; }
+	.empty { text-align: center; color: var(--muted); padding: 2rem; }
+	.drawer-foot { padding: 1.25rem; border-top: 1px solid var(--line); }
+	.total { display: flex; justify-content: space-between; margin-bottom: 1rem; font-size: 1.1rem; }
+
+	.toast { position: fixed; bottom: 1.5rem; left: 50%; transform: translate(-50%, 150%); background: var(--ink); color: #fff; padding: .75rem 1.25rem; border-radius: 10px; transition: .25s; z-index: 50; font-size: .95rem; }
+	.toast.show { transform: translate(-50%, 0); }
+
+	@media (max-width: 860px) {
+		.hero { grid-template-columns: 1fr; padding-top: 2.5rem; }
+		.nav nav { display: none; }
+		.cart-btn { margin-left: auto; }
+		.steps { grid-template-columns: 1fr 1fr; }
+		.how { padding: 2rem 1.25rem; }
+	}
+</style>

@@ -57,8 +57,8 @@ const other: Product[] = [
 
 	<header class="nav">
 		<a class="logo" href="#top">
-			<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 2 4 5v6c0 5 3.5 9.5 8 11 4.5-1.5 8-6 8-11V5l-8-3Z"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg>
-			gnarcotix<span>.xyz</span>
+			<img src="/favicon.svg" width="34" height="34" alt="" />
+			<span class="wm">gnarcotix<span>.xyz</span></span>
 		</a>
 		<nav>
 			<a href="#strips">Test Strips</a>
@@ -424,7 +424,8 @@ const other: Product[] = [
 		border-bottom: 1px solid var(--line);
 	}
 	.logo { display: flex; align-items: center; gap: .5rem; font-weight: 800; font-size: 1.2rem; color: var(--brand); text-decoration: none; }
-	.logo span { color: var(--muted); font-weight: 500; }
+	.logo .wm { color: var(--ink); letter-spacing: -.02em; }
+	.logo .wm span { color: var(--brand); font-weight: 600; }
 	.nav nav { display: flex; gap: 1.25rem; margin-left: auto; }
 	.nav nav a { color: var(--ink); text-decoration: none; font-size: .95rem; }
 	.nav nav a:hover { color: var(--brand); }

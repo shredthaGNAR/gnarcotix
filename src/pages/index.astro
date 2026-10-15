@@ -161,7 +161,7 @@ const other: Product[] = [
 				<p class="lead">
 					Strips tell you if one specific substance is there. A <strong>GC/MS test</strong> (gas chromatography–mass
 					spectrometry, the gold standard used by forensic labs) tells you <em>exactly</em> what's in your sample
-					and how much of each. All for a great price, through top U.S. labs.
+					and how much of each. Find out definitively what's in your drugs from a world-renowned U.S. lab, starting at just $20.
 				</p>
 				<ul class="checks">
 					<li>Identifies every detectable compound, not just one</li>
@@ -170,9 +170,20 @@ const other: Product[] = [
 					<li>Anonymous: results are tied to a sample code, not your name</li>
 					<li>Analyzed by U.S.-based labs only</li>
 				</ul>
-				<div class="buy lab-buy">
-					<span class="price big">$19.00 <small>per GC/MS test</small></span>
-					<button class="btn primary add" data-id="lab-1" data-name="GC/MS Lab Test Kit" data-price="19">Order a GC/MS Test Now</button>
+				<div class="lab-options">
+					<div class="opt">
+						<p class="opt-name">Single Test</p>
+						<p class="price big">$20</p>
+						<p class="opt-sub">1 GC/MS analysis</p>
+						<button class="btn ghost full add" data-id="lab-1" data-name="GC/MS Lab Test (Single)" data-price="20">Order 1 Test</button>
+					</div>
+					<div class="opt best">
+						<span class="opt-tag">Best value</span>
+						<p class="opt-name">6-Pack</p>
+						<p class="price big">$100</p>
+						<p class="opt-sub">Just $16.67 per test, save $20</p>
+						<button class="btn primary full add" data-id="lab-6" data-name="GC/MS Lab Test 6-Pack" data-price="100">Order 6-Pack</button>
+					</div>
 				</div>
 
 				<div class="report" aria-label="Example GC/MS report">
@@ -195,15 +206,20 @@ const other: Product[] = [
 				<h3>GC/MS testing: how we compare</h3>
 				<div class="bar-row">
 					<div class="bar-label"><strong>gnarcotix.xyz</strong><span>U.S. labs</span></div>
-					<div class="bar"><div class="fill ours" style="width:15%"></div></div>
-					<div class="bar-price ours-txt">$19</div>
+					<div class="bar"><div class="fill ours" style="width:16%"></div></div>
+					<div class="bar-price ours-txt">$20</div>
+				</div>
+				<div class="bar-row">
+					<div class="bar-label"><strong>6-pack price</strong><span>Per test</span></div>
+					<div class="bar"><div class="fill ours" style="width:13%"></div></div>
+					<div class="bar-price ours-txt">$16.67</div>
 				</div>
 				<div class="bar-row">
 					<div class="bar-label"><strong>Typical lab services</strong><span>Some based overseas</span></div>
 					<div class="bar"><div class="fill theirs" style="width:100%"></div></div>
 					<div class="bar-price">$125+</div>
 				</div>
-				<p class="save">Save <strong>85%</strong> or more on every sample.</p>
+				<p class="save">Save <strong>84% or more</strong> per test, and up to <strong>87%</strong> with the 6-pack.</p>
 
 				<ol class="lab-steps">
 					<li><span>1</span><div><strong>Order a kit</strong><p>Get a prepaid mailer, sample bag, and a unique anonymous sample code.</p></div></li>
@@ -491,6 +507,13 @@ const other: Product[] = [
 	.checks li::before { content: ""; position: absolute; left: 0; top: .3rem; width: 1rem; height: 1rem; border-radius: 50%; background: rgba(45,212,191,.18); box-shadow: inset 0 0 0 2px var(--brand); }
 	.lab-buy { justify-content: flex-start; gap: 1.25rem; flex-wrap: wrap; }
 	.price.big { font-size: 1.8rem; }
+	.lab-options { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: .5rem; }
+	.opt { position: relative; background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 1.25rem; }
+	.opt.best { border-color: var(--brand); box-shadow: 0 0 0 1px var(--brand), 0 10px 30px rgba(45,212,191,.12); }
+	.opt-tag { position: absolute; top: -.7rem; right: 1rem; background: var(--brand); color: var(--on-brand); font-size: .72rem; font-weight: 800; padding: .2rem .6rem; border-radius: 999px; }
+	.opt-name { margin: 0; font-weight: 700; color: var(--muted); text-transform: uppercase; font-size: .8rem; letter-spacing: .08em; }
+	.opt .price { display: block; margin: .25rem 0 0; }
+	.opt-sub { margin: .1rem 0 1rem; color: var(--muted); font-size: .88rem; }
 	.report { margin-top: 2rem; background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 1.25rem 1.4rem; }
 	.report-head { display: flex; justify-content: space-between; align-items: center; font-size: .8rem; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); }
 	.report-head code { color: var(--brand); text-transform: none; letter-spacing: 0; }
